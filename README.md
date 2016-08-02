@@ -1,5 +1,26 @@
 # C# wrapper for Instamojo API
 
+Table of Contents
+=================
+* [Preface](#preface)
+* [Requirements](#requirements)
+* [Integration](#integration)
+* [Authentication Keys](#authentication-keys)
+* [Payments API](#payments-api)
+    * [Create new Payment Order](#create-new-payment-order)
+      * [Payment Order Creation Parameters](#payment-order-creation-parameters)
+          * [Required](#required)
+          * [Optional](#optional)
+    * [Get list of a Payment order](#get-list-of-a-payment-order)
+      *[Payment Order List Parameters](#payment-order-list-parameters)
+	  * [Optional](#optional-1)	
+    * [Details of Payment order using OrderId](#details-of-payment-order-using-order-id)
+    * [Details of Payment order using TransactionId](#details-of-payment-order-using-transaction-id)
+* [Refund API](#refund-api)
+    * [Create a refund](#create-a-refund)
+      * [Refund Creation Parameters](#refund-creation-parameters)
+          * [Required](#required-1)
+
 ## PrefaceInstamojo DotNet wrapper for the Instamojo API assists you to programmatically create and list payment orders and refunds on Instamojo.
 
 ## RequirementsDotNet Version: 4.0+
