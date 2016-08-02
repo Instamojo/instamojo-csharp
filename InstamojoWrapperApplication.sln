@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstamojoAPI", "InstamojoAPI\InstamojoAPI.csproj", "{F7A6F676-8B3B-4AE3-A3A5-B73299BDFB3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstamojoImpl", "InstamojoImpl\InstamojoImpl.csproj", "{D456F20B-18AF-497A-AD9A-4BA1D614F44C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7A6F676-8B3B-4AE3-A3A5-B73299BDFB3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A6F676-8B3B-4AE3-A3A5-B73299BDFB3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A6F676-8B3B-4AE3-A3A5-B73299BDFB3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A6F676-8B3B-4AE3-A3A5-B73299BDFB3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D456F20B-18AF-497A-AD9A-4BA1D614F44C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D456F20B-18AF-497A-AD9A-4BA1D614F44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D456F20B-18AF-497A-AD9A-4BA1D614F44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D456F20B-18AF-497A-AD9A-4BA1D614F44C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
