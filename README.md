@@ -25,7 +25,7 @@ Table of Contents
 
 ## RequirementsDotNet Version: 4.0+
 
-## IntegrationTo integrate the Instamojo API into your application, add the `InstamojoWrapperApplication.dll` to the classpath of the application.
+## IntegrationTo integrate the Instamojo API into your application, add the `InstamojoAPI.dll` from the latest release to the classpath of the application. 
 
 ## Authentication Keys
 Please raise a support ticket to receive `CLIENT_ID` and `CLIENT_SECRET` for test and production environments.
