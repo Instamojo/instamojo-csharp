@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using InstamojoAPI;
 
@@ -15,17 +12,14 @@ namespace InstamojoImpl
        [STAThread]
        static void Main()
        {
-           Application.EnableVisualStyles();
-           Application.SetCompatibleTextRenderingDefault(false);
+           	Application.EnableVisualStyles();
+           	Application.SetCompatibleTextRenderingDefault(false);
 
-           InstamojoConstants objConstants = new InstamojoConstants();
-
-           string Insta_client_id = InstamojoConstants.CLIENT_ID,
-                  Insta_client_secret = InstamojoConstants.CLIENT_SECRET,
+           	string Insta_client_id = "tmLkZZ0zV41nJwhayBGBOI4m4I7bH55qpUBdEXGS",
+                  Insta_client_secret = "IDejdccGqKaFlGav9bntKULvMZ0g7twVFolC9gdrh9peMS0megSFr7iDpWwWIDgFUc3W5SlX99fKnhxsoy6ipdAv9JeQwebmOU6VRvOEQnNMWwZnWglYmDGrfgKRheXs",
                   Insta_Endpoint = InstamojoConstants.INSTAMOJO_API_ENDPOINT,
-               //Insta_grant_type = InstamojoConstants.GRANT_TYPE, 
                   Insta_Auth_Endpoint = InstamojoConstants.INSTAMOJO_AUTH_ENDPOINT;
-           Instamojo objClass = InstamojoImplementation.getApi(Insta_client_id, Insta_client_secret, Insta_Endpoint, Insta_Auth_Endpoint);
+			Instamojo objClass = InstamojoImplementation.getApi(Insta_client_id, Insta_client_secret, Insta_Endpoint, Insta_Auth_Endpoint);
            CreatePaymentOrder(objClass);
            CreatePaymentOrder_whenInvalidPaymentOrderIsMade(objClass);
        }
