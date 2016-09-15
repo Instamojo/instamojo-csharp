@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Web;
-using System.Runtime.Serialization;
-using System.Web.Helpers;
 
 namespace InstamojoAPI
 {
@@ -123,8 +115,7 @@ namespace InstamojoAPI
         }
 
         private static AccessTokenResponse getAccessToken(string clientId, string clientSecret, string authEndpoint)
-        {
-            string URL = authEndpoint;
+		{
             AccessTokenResponse objPaymentRequestDetailsResponse;
             try
             {
@@ -136,10 +127,8 @@ namespace InstamojoAPI
                     values["grant_type"] = InstamojoConstants.GRANT_TYPE;
 
                     var response = client.UploadValues(authEndpoint, values); //"https://test.instamojo.com/oauth2/token/", values);
-
                     var responseString = Encoding.Default.GetString(response);
                     objPaymentRequestDetailsResponse = JsonDeserialize<AccessTokenResponse>(responseString);
-
                     if (string.IsNullOrEmpty(objPaymentRequestDetailsResponse.access_token))
                     {
                         throw new BaseException("Could not get the access token due to " + objPaymentRequestDetailsResponse.error);
@@ -151,15 +140,7 @@ namespace InstamojoAPI
                 throw new IOException(ex.Message);
             }
             catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ProtocolError)
-                {
-                    HttpWebResponse err = ex.Response as HttpWebResponse;
-                    if (err != null)
-                    {
-                        string htmlResponse = new StreamReader(err.GetResponseStream()).ReadToEnd();
-                    }
-                }
+			{
                 objPaymentRequestDetailsResponse = JsonDeserialize<AccessTokenResponse>(ex.Message);
             }
 
@@ -202,7 +183,7 @@ namespace InstamojoAPI
 
             if (method == "POST")
             {
-                string strJSONData = new JavaScriptSerializer().Serialize(PostData);
+				string strJSONData = new JavaScriptSerializer().Serialize(PostData);
                 using (var streamWriter = new StreamWriter(myHttpWebRequest.GetRequestStream()))
                 {
                     streamWriter.Write(strJSONData);
@@ -219,7 +200,7 @@ namespace InstamojoAPI
 
         private static T JsonDeserialize<T>(string jsonString)
         {
-            return new JavaScriptSerializer().Deserialize<T>(jsonString);
+			return new JavaScriptSerializer().Deserialize<T>(jsonString);
         }
 
         private static string showErrorMessage(string errorMessage)
@@ -238,7 +219,7 @@ namespace InstamojoAPI
         {
             if (objPaymentRequest == null)
             {
-                throw new ArgumentNullException("PaymentOrder Object Can not be Null ");
+                throw new ArgumentNullException(nameof(objPaymentRequest), "PaymentOrder Object Can not be Null ");
             }
 
             bool isInValid= objPaymentRequest.validate();
@@ -295,7 +276,7 @@ namespace InstamojoAPI
         {
             if (objPaymentOrderListRequest == null)
             {
-                throw new ArgumentNullException("PaymentOrderListRequest Object Can not be Null");
+                throw new ArgumentNullException(nameof(objPaymentOrderListRequest), "PaymentOrderListRequest Object Can not be Null");
             }
             string queryString = "", stream = "";
 
@@ -369,7 +350,7 @@ namespace InstamojoAPI
         {
             if (string.IsNullOrEmpty(strOrderId))
             {
-                throw new ArgumentNullException("Order Id Can not be Null or Empty");
+                throw new ArgumentNullException(nameof(strOrderId), "Order Id Can not be Null or Empty");
             }
             try
             {
@@ -414,7 +395,7 @@ namespace InstamojoAPI
         {
             if (string.IsNullOrEmpty(strTransactionId))
             {
-                throw new ArgumentNullException("Transaction Id Can not be Null or Empty");
+                throw new ArgumentNullException(nameof(strTransactionId), "Transaction Id Can not be Null or Empty");
             }
             try
             {
@@ -468,7 +449,7 @@ namespace InstamojoAPI
             }
             if (objCreateRefund.payment_id == null)
             {
-                throw new ArgumentNullException("PaymentId Can not be Null ");
+                throw new ArgumentNullException(nameof(objCreateRefund), "PaymentId Can not be Null ");
             }
             bool isInValid = objCreateRefund.validate();
             if (isInValid)
