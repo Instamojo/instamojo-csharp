@@ -43,7 +43,7 @@ auth_endpoint : https://test.instamojo.com/oauth2/token/
 endpoint: https://test.instamojo.com/v2/
 
 ### Production URLs
-auth endpoint : https://instamojo.com/oauth2/token/
+auth endpoint : https://www.instamojo.com/oauth2/token/
 
 endpoint: https://api.instamojo.com/v2/
 
