@@ -34,7 +34,7 @@ DotNet Version: 4.0+
 To integrate the Instamojo API into your application, add the `InstamojoAPI.dll` from the latest [release](https://github.com/Instamojo/instamojo-csharp/releases) to the classpath of the application.
  
 ## Authentication Keys
-Please raise a support ticket to receive `CLIENT_ID` and `CLIENT_SECRET` for test and production environments.
+**Client ID** and **Client Secret** - Client Secret And Client ID can be generated on the [Integrations page](https://www.instamojo.com/integrations/). Related support article: [How Do I Get My Client ID And Client Secret?](https://support.instamojo.com/hc/en-us/articles/212214265-How-do-I-get-my-Client-ID-and-Client-Secret-)
 
 ## End Points
 ### Test URLs
