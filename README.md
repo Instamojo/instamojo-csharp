@@ -68,16 +68,91 @@ Instamojo objClass = InstamojoImplementation.getApi( “[client_id]”, “[clie
   objPaymentRequest.transaction_id = "test"; // Unique Id to be provided
 
   objPaymentRequest.redirect_url = “redirect_url”;
+  
+  //webhook is optional.
+  objPaymentRequest.webhook_url = "https://your.server.com/webhook";
+  
+  if (objPaymentRequest.validate())
+  {
+               if (objPaymentRequest.emailInvalid)
+               {
+                   MessageBox.Show("Email is not valid");
+               }
+               if (objPaymentRequest.nameInvalid)
+               {
+                   MessageBox.Show("Name is not valid");
+               }
+               if (objPaymentRequest.phoneInvalid)
+               {
+                   MessageBox.Show("Phone is not valid");
+               }
+               if (objPaymentRequest.amountInvalid)
+               {
+                   MessageBox.Show("Amount is not valid");
+               }
+               if (objPaymentRequest.currencyInvalid)
+               {
+                   MessageBox.Show("Currency is not valid");
+               }
+               if (objPaymentRequest.transactionIdInvalid)
+               {
+                   MessageBox.Show("Transaction Id is not valid");
+               }
+               if (objPaymentRequest.redirectUrlInvalid)
+               {
+                   MessageBox.Show("Redirect Url Id is not valid");
+               }
 
-try
- {
-   CreatePaymentOrderResponse objPaymentResponse = objClass.createNewPaymentRequest(objPaymentRequest);
-   MessageBox.Show("Order Id = " + objPaymentResponse.order.id);
- }
- catch (Exception ex)
- {
-   MessageBox.Show("Error:" + ex.Message);
- }
+}else
+{
+               try
+               {
+                   CreatePaymentOrderResponse objPaymentResponse = objClass.createNewPaymentRequest(objPaymentRequest);
+                   MessageBox.Show("Payment URL = " + objPaymentResponse.payment_options.payment_url);
+                   
+               }
+               catch (ArgumentNullException ex)
+               {
+                   MessageBox.Show(ex.Message);
+               }
+               catch (WebException ex)
+               {
+                   MessageBox.Show(ex.Message);
+               }
+               catch (IOException ex)
+               {
+                   MessageBox.Show(ex.Message);
+               }
+               catch (InvalidPaymentOrderException ex)
+               {
+                   if (!ex.IsWebhokValid())
+					{
+						MessageBox.Show("Webhoook is invalid");
+					}
+
+					if (!ex.IsCurrencyValid())
+					{
+						MessageBox.Show("Currency is Invalid");
+					}
+
+					if (!ex.IsTransactionIDValid())
+					{
+						MessageBox.Show("Transaction ID is Inavlid");
+					}
+               }
+               catch (ConnectionException ex)
+               {
+                   MessageBox.Show(ex.Message);
+               }
+               catch (BaseException ex)
+               {
+                   MessageBox.Show(ex.Message);
+               }
+               catch (Exception ex)
+               {
+                   MessageBox.Show("Error:" + ex.Message);
+               }
+}
 ```
 
 #### Payment Order Creation Parameters

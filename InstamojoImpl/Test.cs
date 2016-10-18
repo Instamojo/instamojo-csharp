@@ -32,6 +32,7 @@ namespace InstamojoImpl
 			GetPaymentOrderDetailsUsingTransactionId_WhenTransactionIdIsUnknown(objClass);
 			CreateRefund(objClass);
 			CreateRefund_WhenInvalidRefundIsMade(objClass);
+			CreatePaymentOrder_whenWebhookContainsLocahost(objClass);
        }
        static void CreatePaymentOrder(Instamojo objClass)
        {
@@ -49,6 +50,7 @@ namespace InstamojoImpl
            	objPaymentRequest.transaction_id = "test" + randomName;
 
            	objPaymentRequest.redirect_url = "https://swaggerhub.com/api/saich/pay-with-instamojo/1.0.0";
+			objPaymentRequest.webhook_url = "https://your.server.com/webhook";
            	//Extra POST parameters 
 
            	if (objPaymentRequest.validate())
@@ -88,7 +90,7 @@ namespace InstamojoImpl
                try
                {
                    CreatePaymentOrderResponse objPaymentResponse = objClass.createNewPaymentRequest(objPaymentRequest);
-                   MessageBox.Show("Order Id = " + objPaymentResponse.order.id);
+					MessageBox.Show("Payment URL = " + objPaymentResponse.payment_options.payment_url);
                }
                catch (ArgumentNullException ex)
                {
@@ -104,7 +106,20 @@ namespace InstamojoImpl
                }
                catch (InvalidPaymentOrderException ex)
                {
-                   MessageBox.Show(ex.Message);
+                   if (!ex.IsWebhokValid())
+					{
+						MessageBox.Show("Webhoook is invalid");
+					}
+
+					if (!ex.IsCurrencyValid())
+					{
+						MessageBox.Show("Currency is Invalid");
+					}
+
+					if (!ex.IsTransactionIDValid())
+					{
+						MessageBox.Show("Transaction ID is Inavlid");
+					}
                }
                catch (ConnectionException ex)
                {
@@ -225,6 +240,110 @@ namespace InstamojoImpl
 
 		}
 
+		static void CreatePaymentOrder_whenWebhookContainsLocahost(Instamojo objClass)
+		{
+			PaymentOrder objPaymentRequest = new PaymentOrder();
+			objPaymentRequest.email = "foo@example.com";
+			objPaymentRequest.name = "Test Name";
+			objPaymentRequest.description = "Test Description";
+			objPaymentRequest.phone = "9334556657";
+			objPaymentRequest.amount = 100;
+			objPaymentRequest.currency = "INR";
+			string randomName = Path.GetRandomFileName();
+			randomName = randomName.Replace(".", string.Empty);
+			objPaymentRequest.transaction_id = "test" + randomName;
+
+			objPaymentRequest.redirect_url = "https://swaggerhub.com/api/saich/pay-with-instamojo/1.0.0";
+			objPaymentRequest.webhook_url = "http://localhost:8080/webhook";
+			//Extra POST parameters 
+
+			if (objPaymentRequest.validate())
+			{
+				if (objPaymentRequest.emailInvalid)
+				{
+					MessageBox.Show("Email is not valid");
+				}
+				if (objPaymentRequest.nameInvalid)
+				{
+					MessageBox.Show("Name is not valid");
+				}
+				if (objPaymentRequest.phoneInvalid)
+				{
+					MessageBox.Show("Phone is not valid");
+				}
+				if (objPaymentRequest.amountInvalid)
+				{
+					MessageBox.Show("Amount is not valid");
+				}
+				if (objPaymentRequest.currencyInvalid)
+				{
+					MessageBox.Show("Currency is not valid");
+				}
+				if (objPaymentRequest.transactionIdInvalid)
+				{
+					MessageBox.Show("Transaction Id is not valid");
+				}
+				if (objPaymentRequest.redirectUrlInvalid)
+				{
+					MessageBox.Show("Redirect Url Id is not valid");
+				}
+
+				if (objPaymentRequest.webhookUrlInvalid)
+				{
+					MessageBox.Show("Webhook URL is not valid");
+				}
+			}else
+			{
+				try
+				{
+					CreatePaymentOrderResponse objPaymentResponse = objClass.createNewPaymentRequest(objPaymentRequest);
+					MessageBox.Show("Order Id = " + objPaymentResponse.order.id);
+				}
+				catch (ArgumentNullException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (WebException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (IOException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (InvalidPaymentOrderException ex)
+				{
+					if (!ex.IsWebhokValid())
+					{
+						MessageBox.Show("Webhoook is invalid");
+					}
+
+					if (!ex.IsCurrencyValid())
+					{
+						MessageBox.Show("Currency is Invalid");
+					}
+
+					if (!ex.IsTransactionIDValid())
+					{
+						MessageBox.Show("Transaction ID is Inavlid");
+					}
+				}
+				catch (ConnectionException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (BaseException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error:" + ex.Message);
+				}
+			}
+
+		}
+
 
        static void CreatePaymentOrder_whenSameTransactionIdIsGiven(Instamojo objClass)
        {
@@ -257,7 +376,20 @@ namespace InstamojoImpl
                }
                catch (InvalidPaymentOrderException ex)
                {
-                   MessageBox.Show(ex.Message);
+                   	if (!ex.IsWebhokValid())
+					{
+						MessageBox.Show("Webhoook is invalid");
+					}
+
+					if (!ex.IsCurrencyValid())
+					{
+						MessageBox.Show("Currency is Invalid");
+					}
+
+					if (!ex.IsTransactionIDValid())
+					{
+						MessageBox.Show("Transaction ID is Inavlid");
+					}
                }
                catch (ConnectionException ex)
                {
