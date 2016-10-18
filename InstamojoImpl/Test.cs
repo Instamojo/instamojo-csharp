@@ -83,6 +83,10 @@ namespace InstamojoImpl
                {
                    MessageBox.Show("Redirect Url Id is not valid");
                }
+				if (objPaymentRequest.webhookUrlInvalid)
+				{
+					MessageBox.Show("Webhook URL is not valid");
+				}
 
            }
            else
@@ -106,9 +110,9 @@ namespace InstamojoImpl
                }
                catch (InvalidPaymentOrderException ex)
                {
-                   if (!ex.IsWebhokValid())
+                   if (!ex.IsWebhookValid())
 					{
-						MessageBox.Show("Webhoook is invalid");
+						MessageBox.Show("Webhook is invalid");
 					}
 
 					if (!ex.IsCurrencyValid())
@@ -313,9 +317,9 @@ namespace InstamojoImpl
 				}
 				catch (InvalidPaymentOrderException ex)
 				{
-					if (!ex.IsWebhokValid())
+					if (!ex.IsWebhookValid())
 					{
-						MessageBox.Show("Webhoook is invalid");
+						MessageBox.Show("Webhook is invalid");
 					}
 
 					if (!ex.IsCurrencyValid())
@@ -376,9 +380,9 @@ namespace InstamojoImpl
                }
                catch (InvalidPaymentOrderException ex)
                {
-                   	if (!ex.IsWebhokValid())
+					if (!ex.IsWebhookValid())
 					{
-						MessageBox.Show("Webhoook is invalid");
+						MessageBox.Show("Webhook is invalid");
 					}
 
 					if (!ex.IsCurrencyValid())

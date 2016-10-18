@@ -24,7 +24,7 @@ namespace InstamojoAPI
 			}
 		}
 
-		public bool IsWebhokValid()
+		public bool IsWebhookValid()
 		{
 			if (errorResponse == null)
 			{
