@@ -3,7 +3,7 @@
   public  class ConnectionException:BaseException
     {
         public ConnectionException(string message)
-            : base()
+			: base(message)
         { }
     }
 }

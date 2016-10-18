@@ -257,7 +257,7 @@ namespace InstamojoAPI
                     if (err != null)
                     {
                         string htmlResponse = new StreamReader(err.GetResponseStream()).ReadToEnd();
-                        throw new WebException(err.StatusDescription + " " + htmlResponse);
+						throw new InvalidPaymentOrderException(htmlResponse);
                     }
                 }
                 throw new WebException(ex.Message, ex.InnerException);
