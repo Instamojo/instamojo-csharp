@@ -32,6 +32,7 @@ namespace InstamojoAPI
 		public double? amount { get; set; }
 		public string transaction_id { get; set; }
 		public string redirect_url { get; set; }
+		public string webhook_url { get; set;}
 		public string currency { get; set; }
 
 		//Extra POST parameters 
@@ -47,6 +48,7 @@ namespace InstamojoAPI
 		public bool currencyInvalid;
 		public bool amountInvalid;
 		public bool redirectUrlInvalid;
+		public bool webhookUrlInvalid;
 
 
 		/**
@@ -97,6 +99,12 @@ namespace InstamojoAPI
 				invalid = true;
 				redirectUrlInvalid = true;
 			}
+			if (!string.IsNullOrEmpty(webhook_url) && !URL_MATCHER.IsMatch(webhook_url))
+			{
+				invalid = true;
+				webhookUrlInvalid = true;
+			}
+				
 			return invalid;
 		}
 

@@ -20,28 +20,39 @@ namespace InstamojoImpl
                   Insta_Endpoint = InstamojoConstants.INSTAMOJO_API_ENDPOINT,
                   Insta_Auth_Endpoint = InstamojoConstants.INSTAMOJO_AUTH_ENDPOINT;
 			Instamojo objClass = InstamojoImplementation.getApi(Insta_client_id, Insta_client_secret, Insta_Endpoint, Insta_Auth_Endpoint);
-           CreatePaymentOrder(objClass);
-           CreatePaymentOrder_whenInvalidPaymentOrderIsMade(objClass);
+           	CreatePaymentOrder(objClass);
+           	CreatePaymentOrder_whenInvalidPaymentOrderIsMade(objClass);
+			CreatePaymentOrder_whenWebhookIsInvalid(objClass);
+			CreatePaymentOrder_whenSameTransactionIdIsGiven(objClass);
+			GetAllPaymentOrdersList(objClass);
+			GetPaymentOrderDetailUsingOrderId(objClass);
+			GetPaymentOrderDetailUsingOrderId_WhenOrderIdIsNull(objClass);
+			GetPaymentOrderDetailUsingOrderId_WhenOrderIdIsUnknown(objClass);
+			GetPaymentOrderDetailsUsingTransactionId(objClass);
+			GetPaymentOrderDetailsUsingTransactionId_WhenTransactionIdIsUnknown(objClass);
+			CreateRefund(objClass);
+			CreateRefund_WhenInvalidRefundIsMade(objClass);
        }
        static void CreatePaymentOrder(Instamojo objClass)
        {
            PaymentOrder objPaymentRequest = new PaymentOrder();
            //Required POST parameters
-           objPaymentRequest.name = "ABCD";
-           objPaymentRequest.email = "foo@example.com";
-           objPaymentRequest.phone = "9969156561";
-           objPaymentRequest.amount = 9;
-           objPaymentRequest.currency = "USD";
+        	objPaymentRequest.name = "ABCD";
+           	objPaymentRequest.email = "foo@example.com";
+           	objPaymentRequest.phone = "9969156561";
+			objPaymentRequest.description = "Test description";
+           	objPaymentRequest.amount = 9;
+           	objPaymentRequest.currency = "USD";
 
-           string randomName = Path.GetRandomFileName();
-           randomName = randomName.Replace(".", string.Empty);
-           objPaymentRequest.transaction_id = "test" + randomName;
+           	string randomName = Path.GetRandomFileName();
+           	randomName = randomName.Replace(".", string.Empty);
+           	objPaymentRequest.transaction_id = "test" + randomName;
 
-           objPaymentRequest.redirect_url = "https://swaggerhub.com/api/saich/pay-with-instamojo/1.0.0";
-           //Extra POST parameters 
+           	objPaymentRequest.redirect_url = "https://swaggerhub.com/api/saich/pay-with-instamojo/1.0.0";
+           	//Extra POST parameters 
 
-           if (objPaymentRequest.validate())
-           {
+           	if (objPaymentRequest.validate())
+           	{
                if (objPaymentRequest.emailInvalid)
                {
                    MessageBox.Show("Email is not valid");
@@ -157,6 +168,63 @@ namespace InstamojoImpl
            }
         
        }
+
+		static void CreatePaymentOrder_whenWebhookIsInvalid(Instamojo objClass)
+		{
+			PaymentOrder objPaymentRequest = new PaymentOrder();
+			objPaymentRequest.email = "foo@example.com";
+			objPaymentRequest.name = "Test Name";
+			objPaymentRequest.description = "Test Description";
+			objPaymentRequest.phone = "9334556657";
+			objPaymentRequest.amount = 100;
+			objPaymentRequest.currency = "INR";
+			string randomName = Path.GetRandomFileName();
+			randomName = randomName.Replace(".", string.Empty);
+			objPaymentRequest.transaction_id = "test" + randomName;
+
+			objPaymentRequest.redirect_url = "https://swaggerhub.com/api/saich/pay-with-instamojo/1.0.0";
+			objPaymentRequest.webhook_url = "invalid web hook url";
+			//Extra POST parameters 
+
+			if (objPaymentRequest.validate())
+			{
+				if (objPaymentRequest.emailInvalid)
+				{
+					MessageBox.Show("Email is not valid");
+				}
+				if (objPaymentRequest.nameInvalid)
+				{
+					MessageBox.Show("Name is not valid");
+				}
+				if (objPaymentRequest.phoneInvalid)
+				{
+					MessageBox.Show("Phone is not valid");
+				}
+				if (objPaymentRequest.amountInvalid)
+				{
+					MessageBox.Show("Amount is not valid");
+				}
+				if (objPaymentRequest.currencyInvalid)
+				{
+					MessageBox.Show("Currency is not valid");
+				}
+				if (objPaymentRequest.transactionIdInvalid)
+				{
+					MessageBox.Show("Transaction Id is not valid");
+				}
+				if (objPaymentRequest.redirectUrlInvalid)
+				{
+					MessageBox.Show("Redirect Url Id is not valid");
+				}
+
+				if (objPaymentRequest.webhookUrlInvalid)
+				{
+					MessageBox.Show("Webhook URL is not valid");
+				}
+			}
+
+		}
+
 
        static void CreatePaymentOrder_whenSameTransactionIdIsGiven(Instamojo objClass)
        {
@@ -417,7 +485,42 @@ namespace InstamojoImpl
                {
                    MessageBox.Show("refund amount is not valid");
                }
-           }
+           }else
+			{
+				try
+				{
+					CreateRefundResponce objRefundResponse = objClass.createNewRefundRequest(objRefundRequest);
+					MessageBox.Show("Refund Id = " + objRefundResponse.refund.id);
+				}
+				catch (ArgumentNullException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (WebException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (IOException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (InvalidPaymentOrderException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (ConnectionException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (BaseException ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error:" + ex.Message);
+				}
+			}
        }
       
     }
