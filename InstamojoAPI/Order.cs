@@ -14,6 +14,7 @@
         public string phone { get; set; }
         public string description { get; set; }
         public string redirect_url { get; set; }
+		public string webhook_url { get; set;}
         public string created_at { get; set; }
         public string resource_uri { get; set; }
 

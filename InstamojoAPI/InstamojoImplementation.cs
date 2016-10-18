@@ -183,7 +183,9 @@ namespace InstamojoAPI
 
             if (method == "POST")
             {
-				string strJSONData = new JavaScriptSerializer().Serialize(PostData);
+				JavaScriptSerializer ser = new JavaScriptSerializer();
+				ser.RegisterConverters(new JavaScriptConverter[] { new JavaScriptConverters.NullPropertiesConverter() });
+				string strJSONData = ser.Serialize(PostData);
                 using (var streamWriter = new StreamWriter(myHttpWebRequest.GetRequestStream()))
                 {
                     streamWriter.Write(strJSONData);
