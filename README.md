@@ -102,6 +102,10 @@ Instamojo objClass = InstamojoImplementation.getApi( “[client_id]”, “[clie
                {
                    MessageBox.Show("Redirect Url Id is not valid");
                }
+               if (objPaymentRequest.webhookUrlInvalid)
+               {
+					MessageBox.Show("Webhook URL is not valid");
+               }
 
 }else
 {
@@ -125,9 +129,9 @@ Instamojo objClass = InstamojoImplementation.getApi( “[client_id]”, “[clie
                }
                catch (InvalidPaymentOrderException ex)
                {
-                   if (!ex.IsWebhokValid())
+                   if (!ex.IsWebhookValid())
 					{
-						MessageBox.Show("Webhoook is invalid");
+						MessageBox.Show("Webhook is invalid");
 					}
 
 					if (!ex.IsCurrencyValid())
