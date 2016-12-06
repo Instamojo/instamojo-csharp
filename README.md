@@ -31,7 +31,7 @@ Instamojo DotNet wrapper for the Instamojo API assists you to programmatically c
 DotNet Version: 4.0+
 
 ## Integration
-To integrate the Instamojo API into your application, add the `InstamojoAPI.dll` from the latest [release](https://github.com/Instamojo/instamojo-csharp/releases) to the classpath of the application.
+To integrate the Instamojo API into your application, download the source zip from the latest [release](https://github.com/Instamojo/instamojo-csharp/releases) and add it your project.
  
 ## Authentication Keys
 Generate CLIENT_ID and CLIENT_SECRET for specific environments from the following links.
