@@ -221,7 +221,7 @@ namespace InstamojoAPI
         {
             if (objPaymentRequest == null)
             {
-                throw new ArgumentNullException(nameof(objPaymentRequest), "PaymentOrder Object Can not be Null ");
+				throw new ArgumentNullException(typeof(PaymentOrder).Name, "PaymentOrder Object Can not be Null ");
             }
 
             bool isInValid= objPaymentRequest.validate();
@@ -278,7 +278,7 @@ namespace InstamojoAPI
         {
             if (objPaymentOrderListRequest == null)
             {
-                throw new ArgumentNullException(nameof(objPaymentOrderListRequest), "PaymentOrderListRequest Object Can not be Null");
+				throw new ArgumentNullException(typeof(PaymentOrderListRequest).Name, "PaymentOrderListRequest Object Can not be Null");
             }
             string queryString = "", stream = "";
 
@@ -352,7 +352,7 @@ namespace InstamojoAPI
         {
             if (string.IsNullOrEmpty(strOrderId))
             {
-                throw new ArgumentNullException(nameof(strOrderId), "Order Id Can not be Null or Empty");
+				throw new ArgumentNullException(typeof(string).Name, "Order Id Can not be Null or Empty");
             }
             try
             {
@@ -397,7 +397,7 @@ namespace InstamojoAPI
         {
             if (string.IsNullOrEmpty(strTransactionId))
             {
-                throw new ArgumentNullException(nameof(strTransactionId), "Transaction Id Can not be Null or Empty");
+				throw new ArgumentNullException(typeof(string).Name, "Transaction Id Can not be Null or Empty");
             }
             try
             {
@@ -451,7 +451,7 @@ namespace InstamojoAPI
             }
             if (objCreateRefund.payment_id == null)
             {
-                throw new ArgumentNullException(nameof(objCreateRefund), "PaymentId Can not be Null ");
+				throw new ArgumentNullException(typeof(Refund).Name, "PaymentId cannot be null ");
             }
             bool isInValid = objCreateRefund.validate();
             if (isInValid)
