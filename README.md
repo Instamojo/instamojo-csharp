@@ -163,7 +163,7 @@ Instamojo objClass = InstamojoImplementation.getApi( “[client_id]”, “[clie
 ##### Required
 1. Name:  Name of the customer (max 100 characters).
 2. Email:  Email address of the customer (max 75 characters).
-3. Phone:  Phone number of the customer. It is recommended to use `E.164` number formatting for all phone numbers.
+3. Phone:  Phone number of the customer. At this point, the wrapper only supports 10 digit indian phone number with out country code.
 4. Currency:  String identifier for the currency. Currently, only INR (for Indian 	Rupee) is supported.
 5. Amount:  Amount the customer has to pay. Numbers upto 2 decimal places are supported.
 6. Transaction_id:  Unique identifier for the order (max 64 characters). Identifier can contain alphanumeric characters, hyphens and underscores only. This is generally the unique order id (or primary key) in your system.
