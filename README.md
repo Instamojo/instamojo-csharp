@@ -6,6 +6,7 @@ Table of Contents
 * [Requirements](#requirements)
 * [Integration](#integration)
 * [Authentication Keys](#authentication-keys)
+* [Multitenancy](#multitenancy)
 * [End Points](#end-points)
     * [Test URLs](#test-urls)
     * [Production URLs](#production-urls)
@@ -39,6 +40,9 @@ Generate CLIENT_ID and CLIENT_SECRET for specific environments from the followin
  - [Production Environment](https://www.instamojo.com/integrations)
 
 Related support article: [How Do I Get My Client ID And Client Secret?](https://support.instamojo.com/hc/en-us/articles/212214265-How-do-I-get-my-Client-ID-and-Client-Secret-)
+
+## Multitenancy
+As of now, **MULTITENANCY IS NOT SUPPORTED** by this wrapper which means you will not be able to use this wrapper in a single application with multiple Instamojo accounts. The call to `InstamojoImplementation.getApi()` returns a singleton object of class `Instamojo` with the given CLIENT_ID and CLIENT_SECRET, and will always return the same object even when called multiple times (even with a different CLIENT_ID and CLIENT_SECRET).
 
 ## End Points
 ### Test URLs
