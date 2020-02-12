@@ -121,12 +121,16 @@ namespace InstamojoAPI
             {
                 using (var client = new WebClient())
                 {
+                    
+                    ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+                    ServicePointManager.DefaultConnectionLimit = 9999;
+
                     var values = new NameValueCollection();
                     values["client_id"] = clientId;
                     values["client_secret"] = clientSecret;
                     values["grant_type"] = InstamojoConstants.GRANT_TYPE;
 
-                    var response = client.UploadValues(authEndpoint, values); //"https://test.instamojo.com/oauth2/token/", values);
+                    var response = client.UploadValues(authEndpoint,"POST",values); //"https://test.instamojo.com/oauth2/token/", values);
                     var responseString = Encoding.Default.GetString(response);
                     objPaymentRequestDetailsResponse = JsonDeserialize<AccessTokenResponse>(responseString);
                     if (string.IsNullOrEmpty(objPaymentRequestDetailsResponse.access_token))
